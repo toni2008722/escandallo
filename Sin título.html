@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>*********** de Escandallo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        input[type="number"] {
+            width: 80px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .error {
+            color: red;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>&lt;!DOCTYPE html&gt;</p>
+    <p>&lt;html lang=&quot;es&quot;&gt;</p>
+    <p>&lt;head&gt;</p>
+    <p>&nbsp; &nbsp; &lt;meta charset=&quot;UTF-8&quot; /&gt;</p>
+    <p>&nbsp; &nbsp; &lt;title&gt;*********** de Escandallo&lt;/title&gt;</p>
+    <p>&nbsp; &nbsp; &lt;style&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; body { font-family: Arial, sans-serif; margin: 20px; }</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; input[type=&quot;number&quot;] { width: 80px; }</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; table { border-collapse: collapse; width: 100%; margin-top: 20px; }</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; th { background-color: #f4f4f4; }</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; .error { color: red; }</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; button { margin-top: 10px; }</p>
+    <p>&nbsp; &nbsp; &lt;/style&gt;</p>
+    <p>&lt;/head&gt;</p>
+    <p>&lt;body&gt;</p>
+    <p>&nbsp; &nbsp; &lt;h1&gt;Calculadora de Escandallo&lt;/h1&gt;</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &lt;div&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;label&gt;Nombre ingrediente: &lt;input type=&quot;text&quot; id=&quot;nombreIngrediente&quot; /&gt;&lt;/label&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;label&gt;******** (u o g): &lt;input type=&quot;number&quot; id=&quot;cantidadIngrediente&quot; min=&quot;0&quot; step=&quot;any&quot; /&gt;&lt;/label&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;label&gt;Coste *** unidad (&euro;): &lt;input type=&quot;number&quot; id=&quot;costeIngrediente&quot; min=&quot;0&quot; step=&quot;any&quot; /&gt;&lt;/label&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;button onclick=&quot;agregarIngrediente()&quot;&gt;A&ntilde;adir ingrediente&lt;/button&gt;</p>
+    <p>&nbsp; &nbsp; &lt;/div&gt;</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &lt;p id=&quot;error&quot; class=&quot;error&quot;&gt;&lt;/p&gt;</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &lt;table id=&quot;tablaIngredientes&quot; style=&quot;display:none;&quot;&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;thead&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;tr&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;th&gt;Ingrediente&lt;/th&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;th&gt;Cantidad&lt;/th&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;th&gt;Coste unidad (&euro;)&lt;/th&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;th&gt;***** total (&euro;)&lt;/th&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;th&gt;Eliminar&lt;/th&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/tr&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/thead&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;tbody&gt;&lt;/tbody&gt;</p>
+    <p>&nbsp; &nbsp; &lt;/table&gt;</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &lt;div style=&quot;margin-top: 20px;&quot;&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;label&gt;N&uacute;mero ** raciones: &lt;input type=&quot;number&quot; id=&quot;raciones&quot; min=&quot;1&quot; step=&quot;1&quot; /&gt;&lt;/label&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;button onclick=&quot;calcularEscandallo()&quot;&gt;Calcular coste&lt;/button&gt;</p>
+    <p>&nbsp; &nbsp; &lt;/div&gt;</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &lt;div id=&quot;resultados&quot; style=&quot;margin-top: 20px;&quot;&gt;&lt;/div&gt;</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &lt;script&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; let ingredientes = [];</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; function agregarIngrediente() {</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const ****** = document.getElementById(&apos;nombreIngrediente&apos;).value.trim();</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ***** ******** = parseFloat(document.getElementById(&apos;cantidadIngrediente&apos;).value);</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const ***** = parseFloat(document.getElementById(&apos;costeIngrediente&apos;).value);</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const errorDiv = document.getElementById(&apos;error&apos;);</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; errorDiv.textContent = &apos;&apos;;</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!nombre) {</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; errorDiv.textContent = &apos;Introduce ** nombre del ingrediente.&apos;;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (isNaN(cantidad) || cantidad &lt;= 0) {</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; errorDiv.textContent = &apos;********* *** cantidad v&aacute;lida ***** que 0.&apos;;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (isNaN(coste) || coste &lt; 0) {</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; errorDiv.*********** = &apos;Introduce ** coste v&aacute;**** (0 o m&aacute;s).&apos;;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ingredientes.push({</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; nombre: nombre,</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cantidad: cantidad,</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; coste_unitario: coste,</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; coste_total: cantidad * coste</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById(&apos;nombreIngrediente&apos;).***** = &apos;&apos;;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById(&apos;cantidadIngrediente&apos;).value = &apos;&apos;;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById(&apos;costeIngrediente&apos;).***** = &apos;&apos;;</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mostrarIngredientes();</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; function mostrarIngredientes() {</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const tabla = document.getElementById(&apos;tablaIngredientes&apos;);</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const tbody = tabla.querySelector(&apos;tbody&apos;);</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tbody.innerHTML = &apos;&apos;;</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (ingredientes.length === 0) {</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tabla.style.display = &apos;none&apos;;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tabla.style.display = &apos;table&apos;;</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ingredientes.forEach((i, index) =&gt; {</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const fila = document.createElement(&apos;tr&apos;);</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fila.innerHTML = `</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;td&gt;${i.nombre}&lt;/td&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;td&gt;${i.cantidad}&lt;/td&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;td&gt;${i.coste_unitario.toFixed(2)}&lt;/td&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;td&gt;${i.coste_total.toFixed(2)}&lt;/td&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;td&gt;&lt;button onclick=&quot;eliminarIngrediente(${index})&quot;&gt;X&lt;/button&gt;&lt;/td&gt;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; `;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tbody.appendChild(fila);</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; function eliminarIngrediente(index) {</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ingredientes.splice(index, 1);</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mostrarIngredientes();</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById(&apos;resultados&apos;).********* = &apos;&apos;;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; function calcularEscandallo() {</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const raciones = parseInt(document.getElementById(&apos;raciones&apos;).value);</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const errorDiv = document.getElementById(&apos;error&apos;);</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; errorDiv.textContent = &apos;&apos;;</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (ingredientes.length === 0) {</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; errorDiv.textContent = &apos;A&ntilde;ade al menos un ingrediente.&apos;;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (isNaN(raciones) || raciones &lt;= 0) {</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; errorDiv.*********** = &apos;********* un n&uacute;mero v&aacute;**** de raciones.&apos;;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const costeTotal = ingredientes.reduce((acc, i) =&gt; *** + i.coste_total, 0);</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const ************** = costeTotal / raciones;</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ***** resultadosDiv = document.getElementById(&apos;resultados&apos;);</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let html = `&lt;h2&gt;Resultados&lt;/h2&gt;`;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; html += `&lt;p&gt;Coste total del plato: &lt;strong&gt;${costeTotal.toFixed(2)} &euro;&lt;/strong&gt;&lt;/p&gt;`;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; html += `&lt;p&gt;Coste por raci&oacute;n (${raciones} raciones): &lt;strong&gt;${costePorRacion.toFixed(2)} &euro;&lt;/strong&gt;&lt;/p&gt;`;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; resultadosDiv.innerHTML = html;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+    <p>&nbsp; &nbsp; &lt;/script&gt;</p>
+    <p>&lt;/body&gt;</p>
+    <p>&lt;/html&gt;</p>
+    <p><br></p>
+
+<div style="color: red">Prueba de Word a HTML - por favor <a href="https://wordtohtml.net/site/payment">Go PRO</a> para obtener el HTML completo.</div>
+</body>
+
+</html>
